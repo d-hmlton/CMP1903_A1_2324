@@ -14,9 +14,17 @@ namespace CMP1903_A1_2324
          */
 
         //Property
-
+        protected int _dieVal = 0;
+        
 
         //Method
+        public int Roll()
+        {
+            Random random = new Random(); //Creates an instance of "random" for number generation
+            _dieVal = random.Next(1, 7); //Assigns _dieVal a random value between 1 and 6
+            return _dieVal; //Returns the value
+        }
+        
 
 
     }
