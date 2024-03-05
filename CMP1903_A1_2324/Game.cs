@@ -20,27 +20,40 @@ namespace CMP1903_A1_2324 {
          */
 
         //Properties
-        protected int _sum = -1;
-        Die dieFirst = new Die(); Die dieSecond = new Die(); Die dieThird = new Die();
+        protected int _sum = -1; 
+        Die dieFirst = new Die();
+        Die dieSecond = new Die();
+        Die dieThird = new Die();
 
         //Methods
         public void RollDie() {
-            int firstRoll = dieFirst.Roll(); Console.WriteLine("Die 1: " + firstRoll);
-            int secondRoll = dieSecond.Roll(); Console.WriteLine("Die 2: " + secondRoll);
-            int thirdRoll = dieThird.Roll(); Console.WriteLine("Die 3: " + thirdRoll);
+            //First dice roll
+            int firstRoll = dieFirst.Roll();
+            Console.WriteLine("Die 1: " + firstRoll);
+
+            //Second dice roll
+            int secondRoll = dieSecond.Roll();
+            Console.WriteLine("Die 2: " + secondRoll);
+
+            //Third dice roll
+            int thirdRoll = dieThird.Roll();
+            Console.WriteLine("Die 3: " + thirdRoll);
+
+            //Sum calculation
             _sum = firstRoll + secondRoll + thirdRoll;
             Console.WriteLine("SUM = " + _sum);
         }
 
         public int GetRolls(int die) {
+            //Exception handling - ensures the int passed to the method is between 1 and 3, the accepted range
             if (die < 1 || die > 3) {
                 throw new ArgumentOutOfRangeException(die + " is not in the accepted range.");
             }
 
-            if (die == 1) { return dieFirst.DieVal; }
-            else if (die == 2) { return dieSecond.DieVal; }
-            else if (die == 3) { return dieThird.DieVal; }
-            else { return -1; }
+            if (die == 1) { return dieFirst.DieVal; } //If the int provided is 1, returns value of first dice
+            else if (die == 2) { return dieSecond.DieVal; } //If 2, returns second
+            else if (die == 3) { return dieThird.DieVal; } //If 3, returns third
+            else { return -1; } //If none of the above, returns -1
         }
 
         public int Sum { get { return _sum; } set { _sum = value; } }
