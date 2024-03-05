@@ -32,6 +32,7 @@ namespace CMP1903_A1_2324 {
 
         //Method
         public void ForTest() {
+            //Game object testing
             //Rolling die in our Game test object
             testGame.RollDie();
 
@@ -47,6 +48,8 @@ namespace CMP1903_A1_2324 {
             //Verifying that the "Sum" given by the Game object is accurate
             Debug.Assert(testGame.Sum == _testSum);
 
+
+            //Die object testing
             //Verifying the output of the Die object
             _testDieVal = testDie.Roll();
             Debug.Assert(_testDieVal <= 6 && _testDieVal >= 1);
@@ -54,6 +57,8 @@ namespace CMP1903_A1_2324 {
             //Verifying that the "DieVal" given by the Die object is accurate
             Debug.Assert(testDie.DieVal == _testDieVal);
 
+
+            //Game object - average values testing
             //Verifying that "Games" has been updated as expected after a first game
             Debug.Assert(testGame.Games == 1);
 
