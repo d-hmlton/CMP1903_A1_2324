@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace CMP1903_A1_2324 {
     /// <summary>
-    /// Rolls three dice, represented by three Die objects, prints the values, adds up the "Sum", and prints that too.
+    /// Rolls three Die objects, prints the values, adds up the "Sum" and prints that too. Then calculates some averages.
     /// </summary>
     /// <remarks>
     /// Includes a separate method, GetRolls(int), to return the int values of the three Die objects to the Testing class.
+    /// The program updates two properties - the number of games (_games, int), and the average (_average, double) every game.
+    /// On the first game, it only has to set _games to 1 and set _average to the current sum. (_sum)
+    /// After that, it multiplies _average by _games, adds the current sum, increments _games by 1, then divides _average by _games.
     /// </remarks>
     internal class Game {
         /*
@@ -20,7 +23,13 @@ namespace CMP1903_A1_2324 {
          */
 
         //Properties
-        protected int _sum = -1; 
+        protected int _sum = -1;
+
+        //Stats to print at end
+        protected int _games = -1;
+        protected double _average = -1.00d;
+
+        //Three die objects
         Die dieFirst = new Die();
         Die dieSecond = new Die();
         Die dieThird = new Die();
@@ -42,6 +51,20 @@ namespace CMP1903_A1_2324 {
             //Sum calculation
             _sum = firstRoll + secondRoll + thirdRoll;
             Console.WriteLine("SUM = " + _sum);
+
+            if (_games == -1) {
+                //Runs for the first game only - sets initial values for these properties
+                _games = 1;
+                _average = _sum;
+            } else if (_games > 0) {
+                //Average calculation
+                _average = _average * _games; //Takes current average and multiplies it by games played (previously)...
+                _average += _sum;             //Adds the sum from this game to the value...
+                _games++;                     //Increments games played by one...
+                _average /= _games;           //Then divides by games played (currently) to get the average
+            } else {
+                throw new ArgumentOutOfRangeException($"The \'_games\' property cannot be equal to {_games}.");
+            }
         }
 
         public int GetRolls(int die) {
@@ -57,5 +80,7 @@ namespace CMP1903_A1_2324 {
         }
 
         public int Sum { get { return _sum; } set { _sum = value; } }
+        public int Games { get { return _games; } set { _games = value; } }
+        public double Average { get { return _average; } set { _average = value; } }
     }
 }
