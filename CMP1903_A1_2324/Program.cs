@@ -27,13 +27,13 @@ namespace CMP1903_A1_2324 {
             Game game = new Game();
 
             //Doing Testing first
-            Console.WriteLine("--Testing--");
             test.ForTest();
 
             //Game loop - loop implemented to enable continuous die rolls
-            Console.WriteLine("\n--Game--");
+            Console.WriteLine("--Game--");
             while (true) {
                 game.RollDie();
+                game.PrintRoll();
 
                 string input; //Creates input variable early; I ran into problems using it outside the validation loop
                 Console.WriteLine("\nWould you like to roll again?");
@@ -46,7 +46,7 @@ namespace CMP1903_A1_2324 {
                     try {
                         input = input.ToLower(); //Sets the input to lowercase, so uppercase/lowercase Y/N are all valid.
                     } catch (Exception ex) {
-                        Console.WriteLine("\nAn unknown error occured converting the input to lowercase.");
+                        Console.WriteLine("\nAn unknown error occured converting the input to lowercase: " + ex);
                         continue; //Resets the validation loop - so, asking user to input something else
                     }
 
@@ -65,8 +65,8 @@ namespace CMP1903_A1_2324 {
             //Statistics printing
             Console.WriteLine("\n--Statistics--");
             Console.WriteLine($"TOTAL GAMES: {game.Games}");
-            Console.WriteLine($"AVERAGE DIE: {game.Average / 3}");
-            Console.WriteLine($"AVERAGE SUM: {game.Average}");
+            Console.WriteLine($"AVERAGE DIE: {(game.Average / 3).ToString("#.##")}");
+            Console.WriteLine($"AVERAGE SUM: {(game.Average).ToString("#.##")}");
 
             Console.ReadLine(); //Just keeps terminal open
         }

@@ -36,35 +36,35 @@ namespace CMP1903_A1_2324 {
 
         //Methods
         public void RollDie() {
-            //First dice roll
+            //Performing three die rolls
             int firstRoll = dieFirst.Roll();
-            Console.WriteLine("Die 1: " + firstRoll);
-
-            //Second dice roll
             int secondRoll = dieSecond.Roll();
-            Console.WriteLine("Die 2: " + secondRoll);
-
-            //Third dice roll
             int thirdRoll = dieThird.Roll();
-            Console.WriteLine("Die 3: " + thirdRoll);
 
             //Sum calculation
             _sum = firstRoll + secondRoll + thirdRoll;
-            Console.WriteLine("SUM = " + _sum);
 
+            //Average property updating
             if (_games == -1) {
                 //Runs for the first game only - sets initial values for these properties
                 _games = 1;
                 _average = _sum;
             } else if (_games > 0) {
                 //Average calculation
-                _average = _average * _games; //Takes current average and multiplies it by games played (previously)...
-                _average += _sum;             //Adds the sum from this game to the value...
-                _games++;                     //Increments games played by one...
-                _average /= _games;           //Then divides by games played (currently) to get the average
+                _average *= _games; //Takes current average and multiplies it by games played (previously)...
+                _average += _sum;   //Adds the sum from this game to the value...
+                _games++;           //Increments games played by one...
+                _average /= _games; //Then divides by games played (currently) to get the average
             } else {
                 throw new ArgumentOutOfRangeException($"The \'_games\' property cannot be equal to {_games}.");
             }
+        }
+
+        public void PrintRoll() {
+            Console.WriteLine($"Die 1: {dieFirst.DieVal}");
+            Console.WriteLine($"Die 2: {dieSecond.DieVal}");
+            Console.WriteLine($"Die 3: {dieThird.DieVal}");
+            Console.WriteLine($"SUM  = {_sum}");
         }
 
         public int GetRolls(int die) {
