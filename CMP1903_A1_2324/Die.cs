@@ -16,11 +16,11 @@ namespace CMP1903_A1_2324 {
 
         //Properties
         protected int _dieVal = -1;
-        private static Random random = new Random(); //Creates a single instance of "random" for number generation
+        private static Random _random = new Random(); //Creates a single instance of "random" for number generation
 
         //Methods
         public int Roll() {
-            _dieVal = random.Next(1, 7); //Assigns _dieVal a random value between 1 and 6
+            _dieVal = _random.Next(1, 7); //Assigns _dieVal a random value between 1 and 6
             return _dieVal; //Returns the value
         }
 
