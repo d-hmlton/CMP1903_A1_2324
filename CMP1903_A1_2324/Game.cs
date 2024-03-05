@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace CMP1903_A1_2324 {
     /// <summary>
-    /// Rolls three Die objects, prints the values, adds up the "Sum" and prints that too. Then calculates some averages.
+    /// Rolls three Die objects and adds up the "Sum", while calculating averages for total rolls. Has a method to print values.
     /// </summary>
     /// <remarks>
+    /// The method to print values is PrintRoll(), and will print the three individual die values and then the sum.
+    /// The purpose of this, rather than just having it as part of DieRoll(), is so printing is optional when running tests.
     /// Includes a separate method, GetRolls(int), to return the int values of the three Die objects to the Testing class.
     /// The program updates two properties - the number of games (_games, int), and the average (_average, double) every game.
     /// On the first game, it only has to set _games to 1 and set _average to the current sum. (_sum)
@@ -61,8 +63,8 @@ namespace CMP1903_A1_2324 {
         }
 
         public void PrintRoll() {
-            Console.WriteLine($"Die 1: {dieFirst.DieVal}");
-            Console.WriteLine($"Die 2: {dieSecond.DieVal}");
+            Console.WriteLine($"Die 1: {dieFirst.DieVal}");  //Fetches the "DieVal"s of the respective Die objects
+            Console.WriteLine($"Die 2: {dieSecond.DieVal}"); //XML comment explains why this is it's own method
             Console.WriteLine($"Die 3: {dieThird.DieVal}");
             Console.WriteLine($"SUM  = {_sum}");
         }
