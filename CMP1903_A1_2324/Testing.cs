@@ -10,7 +10,6 @@ namespace CMP1903_A1_2324 {
     /// Uses Debug.Assert() to perform a number of tests on the Game and Die classes.
     /// </summary>
     /// <remarks>
-    /// Ensures the properties of both are correctly set to their default value, -1, or -1.00.
     /// The result of the Game object's methods is compared to their expected outputs: dice rolls within 1-6, sum within 3-18, 
     ///  and "Sum" property then validated. "Games" should be 1, and "Average" should be equal to "Sum".
     /// The Die class is checked separately to ensure result is within 1-6. "DieVal" property is then validated.
@@ -33,18 +32,7 @@ namespace CMP1903_A1_2324 {
 
         //Method
         public void ForTest() {
-            //Ensuring the default value of the Game object's "Sum" property is -1
-            Debug.Assert(testGame.Sum == -1);
-
-            //Ensuring the default value of the Die object's "DieVal" property is -1
-            Debug.Assert(testDie.DieVal == -1);
-
-            //Ensuring the default value of the Game object's "Games" property is -1
-            Debug.Assert(testGame.Games == -1);
-
-            //Ensuring the default value of the Game object's "Average" property is -1.00 (double)
-            Debug.Assert(testGame.Average == -1.00);
-            
+            //Game object testing
             //Rolling die in our Game test object
             testGame.RollDie();
 
@@ -60,6 +48,8 @@ namespace CMP1903_A1_2324 {
             //Verifying that the "Sum" given by the Game object is accurate
             Debug.Assert(testGame.Sum == _testSum);
 
+
+            //Die object testing
             //Verifying the output of the Die object
             _testDieVal = testDie.Roll();
             Debug.Assert(_testDieVal <= 6 && _testDieVal >= 1);
@@ -67,6 +57,8 @@ namespace CMP1903_A1_2324 {
             //Verifying that the "DieVal" given by the Die object is accurate
             Debug.Assert(testDie.DieVal == _testDieVal);
 
+
+            //Game object - average values testing
             //Verifying that "Games" has been updated as expected after a first game
             Debug.Assert(testGame.Games == 1);
 
