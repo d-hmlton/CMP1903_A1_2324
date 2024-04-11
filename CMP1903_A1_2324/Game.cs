@@ -69,6 +69,8 @@ namespace CMP1903_A1_2324 {
             Console.WriteLine($"SUM  = {_sum}");
         }
 
+        //BELOW CODE BREAKS TESTING BEING DISABLED! 
+        /* 
         public int GetRolls(int die) {
             //Exception handling - ensures the int passed to the method is between 1 and 3, the accepted range
             if (die < 1 || die > 3) {
@@ -79,7 +81,7 @@ namespace CMP1903_A1_2324 {
             else if (die == 2) { return dieSecond.DieVal; } //If 2, returns second
             else if (die == 3) { return dieThird.DieVal; } //If 3, returns third
             else { return -1; } //If none of the above, returns -1
-        }
+        } */
 
         public int Sum { get { return _sum; } set { _sum = value; } }
         public int Games { get { return _games; } set { _games = value; } }
