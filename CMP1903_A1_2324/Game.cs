@@ -33,8 +33,6 @@ namespace CMP1903_A1_2324 {
 
         //Instantiating a die object
         Die dice = new Die();
-        //Die dieSecond = new Die();
-        //Die dieThird = new Die();
 
         //Methods
         public int RollDie(int rolls)
@@ -46,18 +44,7 @@ namespace CMP1903_A1_2324 {
             {
                 rollList.Add(dice.Roll());
                 _sum = _sum + rollList[i];
-                Console.WriteLine(dice.DieVal);
             }
-            
-            //Performing three die rolls
-            //int firstRoll = dieFirst.Roll();
-            //int secondRoll = dieSecond.Roll();
-            //int thirdRoll = dieThird.Roll();
-
-
-
-            //Sum calculation
-            //_sum = firstRoll + secondRoll + thirdRoll;
 
             //Average property updating
             if (_games == -1) {
@@ -76,27 +63,6 @@ namespace CMP1903_A1_2324 {
 
             return _sum;
         }
-
-        /* public void PrintRoll() {
-            Console.WriteLine($"Die 1: {dieFirst.DieVal}");  //Fetches the "DieVal"s of the respective Die objects
-            Console.WriteLine($"Die 2: {dieSecond.DieVal}"); //XML comment explains why this is it's own method
-            Console.WriteLine($"Die 3: {dieThird.DieVal}");
-            Console.WriteLine($"SUM  = {_sum}");
-        } */
-
-        //BELOW CODE BREAKS TESTING BEING DISABLED! 
-        /* 
-        public int GetRolls(int die) {
-            //Exception handling - ensures the int passed to the method is between 1 and 3, the accepted range
-            if (die < 1 || die > 3) {
-                throw new ArgumentOutOfRangeException(die + " is not in the accepted range.");
-            }
-
-            if (die == 1) { return dieFirst.DieVal; } //If the int provided is 1, returns value of first dice
-            else if (die == 2) { return dieSecond.DieVal; } //If 2, returns second
-            else if (die == 3) { return dieThird.DieVal; } //If 3, returns third
-            else { return -1; } //If none of the above, returns -1
-        } */
 
         public int Sum { get { return _sum; } set { _sum = value; } }
         public int Games { get { return _games; } set { _games = value; } }
