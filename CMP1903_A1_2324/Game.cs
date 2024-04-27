@@ -31,20 +31,33 @@ namespace CMP1903_A1_2324 {
         protected int _games = -1;
         protected double _average = -1.00d;
 
-        //Three die objects
-        Die dieFirst = new Die();
-        Die dieSecond = new Die();
-        Die dieThird = new Die();
+        //Instantiating a die object
+        Die dice = new Die();
+        //Die dieSecond = new Die();
+        //Die dieThird = new Die();
 
         //Methods
-        public void RollDie() {
+        public int RollDie(int rolls)
+        {
+            List<int> rollList = new List<int>();
+            _sum = 0;
+
+            for (int i = 0; i < rolls; i++)
+            {
+                rollList.Add(dice.Roll());
+                _sum = _sum + rollList[i];
+                Console.WriteLine(dice.DieVal);
+            }
+            
             //Performing three die rolls
-            int firstRoll = dieFirst.Roll();
-            int secondRoll = dieSecond.Roll();
-            int thirdRoll = dieThird.Roll();
+            //int firstRoll = dieFirst.Roll();
+            //int secondRoll = dieSecond.Roll();
+            //int thirdRoll = dieThird.Roll();
+
+
 
             //Sum calculation
-            _sum = firstRoll + secondRoll + thirdRoll;
+            //_sum = firstRoll + secondRoll + thirdRoll;
 
             //Average property updating
             if (_games == -1) {
@@ -60,14 +73,16 @@ namespace CMP1903_A1_2324 {
             } else {
                 throw new ArgumentOutOfRangeException($"The \'_games\' property cannot be equal to {_games}.");
             }
+
+            return _sum;
         }
 
-        public void PrintRoll() {
+        /* public void PrintRoll() {
             Console.WriteLine($"Die 1: {dieFirst.DieVal}");  //Fetches the "DieVal"s of the respective Die objects
             Console.WriteLine($"Die 2: {dieSecond.DieVal}"); //XML comment explains why this is it's own method
             Console.WriteLine($"Die 3: {dieThird.DieVal}");
             Console.WriteLine($"SUM  = {_sum}");
-        }
+        } */
 
         //BELOW CODE BREAKS TESTING BEING DISABLED! 
         /* 

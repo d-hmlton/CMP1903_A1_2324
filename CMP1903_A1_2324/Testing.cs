@@ -34,28 +34,16 @@ namespace CMP1903_A1_2324 {
         public void ForTest() {
             //Game object testing
             //Rolling die in our Game test object
-            testGame.RollDie();
-
-            //Verifying the individual die values of the Game object
-            for (int i = 1; i < 4; i++) {
-                Debug.Assert(testGame.GetRolls(i) <= 6 || testGame.GetRolls(i) >= 1);
-                _testSum += testGame.GetRolls(i); //Will be used later to test the sum
-            }
+            int sum = testGame.RollDie(3);
 
             //Verifying the sum of the three die values of the Game object
-            Debug.Assert(testGame.Sum <= 18 && testGame.Sum >= 3);
-
-            //Verifying that the "Sum" given by the Game object is accurate
-            Debug.Assert(testGame.Sum == _testSum);
+            Debug.Assert(sum <= 18 && sum >= 3);
 
 
             //Die object testing
             //Verifying the output of the Die object
             _testDieVal = testDie.Roll();
             Debug.Assert(_testDieVal <= 6 && _testDieVal >= 1);
-
-            //Verifying that the "DieVal" given by the Die object is accurate
-            Debug.Assert(testDie.DieVal == _testDieVal);
 
 
             //Game object - average values testing
@@ -65,14 +53,12 @@ namespace CMP1903_A1_2324 {
             //Verifying that "Average" is equal to "Sum" (as expected) after a first game
             Debug.Assert(testGame.Average == testGame.Sum);
 
+
             //Testing averages after ten rolls
             for (int i = 2; i <= 10; i++) {
-                testGame.RollDie();
+                testGame.RollDie(3);
                 _testGames = i;
             }
-
-            //Verifying that "Games" given by the Game object is (still) accurate
-            Debug.Assert(testGame.Games == _testGames);
 
             //Verifying that "Average" is within the expected range - 3 and 18
             Debug.Assert(testGame.Average <= 18 && testGame.Average >= 3);

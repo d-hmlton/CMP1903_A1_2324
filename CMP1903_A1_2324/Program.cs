@@ -32,8 +32,8 @@ namespace CMP1903_A1_2324 {
             //Game loop - loop implemented to enable continuous die rolls
             Console.WriteLine("--Game--");
             while (true) {
-                game.RollDie();
-                game.PrintRoll();
+                int sum = game.RollDie(3);
+                Console.WriteLine($"Sum = {sum}");
 
                 string input; //Creates input variable early; I ran into problems using it outside the validation loop
                 Console.WriteLine("\nWould you like to roll again?");
