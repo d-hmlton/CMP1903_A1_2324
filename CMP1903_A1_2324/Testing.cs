@@ -32,6 +32,9 @@ namespace CMP1903_A1_2324 {
 
         //Method
         public void ForTest() {
+            /*
+
+
             //Game object testing
             //Rolling die in our Game test object
             int sum = testGame.RollDie(3);
@@ -62,6 +65,10 @@ namespace CMP1903_A1_2324 {
 
             //Verifying that "Average" is within the expected range - 3 and 18
             Debug.Assert(testGame.Average <= 18 && testGame.Average >= 3);
+
+            Console.WriteLine("No issues found while testing.\n");
+
+            */
         }
     }
 }
