@@ -11,7 +11,7 @@ namespace CMP1903_A1_2324 {
     /// <remarks>
     ///
     /// </remarks>
-    internal class Game {
+    internal abstract class Game {
         /*
          * The Game class should create three die objects, roll them, sum and report the total of the three dice rolls.
          *
@@ -23,14 +23,6 @@ namespace CMP1903_A1_2324 {
         Die dice = new Die();
 
         //Methods
-        /// <summary>
-        /// A method to call "Sevens Out" or "Three Or More", and handle the (stastics? update this later)
-        /// </summary>
-        public void GameHandler()
-        {
-            Console.WriteLine("\n--Game--\n");
-        }
-
         /// <summary>
         /// Takes and returns an integer list - 'rollStore'.
         /// Rolls die as many times as there is capacity in the provided list.
