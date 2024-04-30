@@ -11,7 +11,7 @@ namespace CMP1903_A1_2324
         int _total = 0;
         int _plays = 0;
 
-        public string GameRules(bool isPlayer1, bool isPartner)
+        public string GameRules(string player)
         {
             //Variables
             List<int> rollStore = new List<int>(5);
@@ -62,10 +62,10 @@ namespace CMP1903_A1_2324
                 if (kind == 2)
                 {
                     //Question prompt - uses Console.WriteLine. Would need to change if GUI implementation wanted
-                    if (isPartner == true || isPlayer1 == true)
+                    if (player != "Computer")
                     {
                         //Asks player(s) if they want to roll three or advance to five
-                        willRollThree = TwoKindPrompt(tempValStore, isPlayer1);
+                        willRollThree = TwoKindPrompt(tempValStore, player);
                     } 
 
                     if (willRollThree == true)
@@ -97,13 +97,13 @@ namespace CMP1903_A1_2324
                 rollStore.Clear();
             }
 
-            return $" reached a score of {_total} after {_plays} plays!\n";
+            return $" reached {_total} after {_plays} plays!\n";
         }
 
-        protected bool TwoKindPrompt(int value, bool isPlayer1)
+        protected bool TwoKindPrompt(int value, string player)
         {
             string input;
-            bool willRollThree = true;
+            bool willRollThree;
 
             Console.WriteLine($" got a two of a kind (a pair of {value}), which gets no points.");
             Console.WriteLine($"Would you like to: \n 1: Try your luck by rolling three more die?\n 2: Move on and roll another five?");
@@ -124,8 +124,7 @@ namespace CMP1903_A1_2324
             }
 
             //NOTE - The code here looks for the INVERSE, as Menu flips 'isPlayer1' before it calls 'GameRules()'
-            if (isPlayer1 == true) { Console.Write("\nPlayer 1"); }
-            else if (isPlayer1 == false) { Console.Write("\nPlayer 2"); }
+            Console.Write($"\n{player}");
             return willRollThree;
         }
 

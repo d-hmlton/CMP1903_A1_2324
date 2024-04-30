@@ -25,70 +25,13 @@ namespace CMP1903_A1_2324 {
             Menu altMenu = new Menu();
 
             Game game = new Game();
-            
-
+           
             while (true)
             {
                 Console.WriteLine("--Menu--");
                 altMenu.MainMenu();
                 break;
             }
-
-            /*
-             * Create a Game object and call its methods.
-             * Create a Testing object to verify the output and operation of the other classes.
-             */
-
-            /* 
-            //Creating new 'Game' and 'Testing' objects
-            Testing test = new Testing();
-            Game game = new Game();
-
-            //Doing Testing first
-            test.ForTest();
-
-            //Game loop - loop implemented to enable continuous die rolls
-            Console.WriteLine("--Game--");
-            while (true) {
-                int sum = game.RollDie(3);
-                Console.WriteLine($"Sum = {sum}");
-
-                string input; //Creates input variable early; I ran into problems using it outside the validation loop
-                Console.WriteLine("\nWould you like to roll again?");
-
-                //Input validation loop
-                while (true) {
-                    Console.WriteLine("Please enter \"Y\" or \"N\".");
-                    input = Console.ReadLine();
-
-                    try {
-                        input = input.ToLower(); //Sets the input to lowercase, so uppercase/lowercase Y/N are all valid.
-                    } catch (Exception ex) {
-                        Console.WriteLine("\nAn unknown error occured converting the input to lowercase: " + ex);
-                        continue; //Resets the validation loop - so, asking user to input something else
-                    }
-
-                    if (input != "y" && input != "n") { //If the input provided is both not Y/y AND not N/n
-                        Console.WriteLine("\nThe input provided is invalid - not \"Y\" or \"N\".");
-                        continue; //Resets loop
-                    }
-
-                    break; //Exits this loop if input is validated
-                }
-
-                if (input != "y") { break; } //Exits the game loop if anything other than "Y" is given - so, if "N" is given
-                else { Console.WriteLine(); }
-            }
-
-            //Statistics printing
-            Console.WriteLine("\n--Statistics--");
-            Console.WriteLine($"TOTAL GAMES: {game.Games}");
-            Console.WriteLine($"AVERAGE DIE: {(game.Average / 3).ToString("#.##")}");
-            Console.WriteLine($"AVERAGE SUM: {(game.Average).ToString("#.##")}");
-
-            Console.ReadLine(); //Just keeps terminal open
-
-            */
         }
 
         protected void MainMenu()
@@ -98,6 +41,7 @@ namespace CMP1903_A1_2324 {
             Console.WriteLine(" 3: View statistics data.\n 4: Perform tests in Testing class.");
 
             string input;
+            string player = "Error";
             string toPrint; //Stores return strings from methods
 
             while (true)
@@ -121,24 +65,19 @@ namespace CMP1903_A1_2324 {
                     {
                         if (isPlayer1 == true)
                         {
-                            Console.WriteLine("\n-Player 1's Turn-\n");
-                            Console.Write("Player 1");
+                            player = "Player 1";
                             isPlayer1 = false;
                         }
                         else if (isPlayer1 == false)
                         {
-                            if (isPartner == true)
-                            {
-                                Console.WriteLine("\n-Player 2's Turn-\n");
-                                Console.Write("Player 2");
-                            }
-                            if (isPartner == false)
-                            {
-                                Console.WriteLine("\n-Computer's Turn-\n");
-                                Console.Write("Computer");
-                            }
+                            if (isPartner == true) { player = "Player 2"; }
+                            if (isPartner == false) { player = "Computer"; }
+
                             isPlayer1 = true;
                         }
+
+                        Console.WriteLine($"\n-{player}'s Turn-\n");
+                        Console.Write($"{player}");
 
                         if (input == "1")
                         {
@@ -146,17 +85,21 @@ namespace CMP1903_A1_2324 {
 
                             if (_statistics.SevensScore < _sevensOut.Total)
                             {
+                                _statistics.SevensScoreWinner = player;
                                 _statistics.SevensScore = _sevensOut.Total;
                             }
 
                             if (_statistics.SevensPlays < _sevensOut.Plays)
                             {
+                                _statistics.SevenPlaysWinner = player;
                                 _statistics.SevensPlays = _sevensOut.Plays;
                             }
                         }
                         else if (input == "2")
                         {
-                            toPrint = _threeOrMore.GameRules(!isPlayer1, isPartner); //Flips 'isPlayer1' since it was flipped earlier
+                            toPrint = _threeOrMore.GameRules(player);
+
+                            _statistics.ThreesWinner = player;
                             _statistics.ThreesPlays = _threeOrMore.Plays;
                         }
                         else { toPrint = "ERROR"; }
@@ -171,12 +114,19 @@ namespace CMP1903_A1_2324 {
 
                 else if (input == "3")
                 {
-                    //Insert Statistics call here
+                    Console.WriteLine("\n--Statistics--");
+                    Console.WriteLine("\nSevens Out - High Scores");
+                    Console.WriteLine($"Best Score: {_statistics.SevensScore} ({_statistics.SevensScoreWinner})");
+                    Console.WriteLine($"Most Plays: {_statistics.SevensPlays} ({_statistics.SevenPlaysWinner})");
+                    Console.WriteLine("\nThree Or More - High Score");
+                    Console.WriteLine($"Least Plays: {_statistics.ThreesPlays} ({_statistics.ThreesWinner})");
                 }
+
                 else if (input == "4")
                 {
                     //Insert Testing call here
                 }
+
                 else
                 {
                     Console.WriteLine("\nThe input provided is invalid - not \"1\", \"2\", \"3\", or \"4\".");
