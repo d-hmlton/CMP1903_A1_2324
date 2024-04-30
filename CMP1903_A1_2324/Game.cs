@@ -20,7 +20,7 @@ namespace CMP1903_A1_2324 {
          */
 
         //Instantiating a die object
-        Die dice = new Die();
+        protected Die dice = new Die();
 
         //Methods
         /// <summary>

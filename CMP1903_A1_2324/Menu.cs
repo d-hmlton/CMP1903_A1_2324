@@ -16,15 +16,15 @@ namespace CMP1903_A1_2324 {
     /// When the loop is broken, the program prints some statistics stores by the Game object - the number of games and averages.
     /// </remarks>
     internal class Menu {
-        SevensOut _sevensOut = new SevensOut();
-        ThreeOrMore _threeOrMore = new ThreeOrMore();
-        Statistics _statistics = new Statistics();
+        //Object instantiations
+        private SevensOut _sevensOut = new SevensOut();
+        private ThreeOrMore _threeOrMore = new ThreeOrMore();
+        private Statistics _statistics = new Statistics();
+        private Testing _testing = new Testing();
 
         static void Main(string[] args) {
             //Needed to call classes in this object
             Menu altMenu = new Menu();
-
-            Game game = new Game();
            
             while (true)
             {
@@ -124,7 +124,10 @@ namespace CMP1903_A1_2324 {
 
                 else if (input == "4")
                 {
-                    //Insert Testing call here
+                    Console.WriteLine("\n--Testing--\n");
+                    Console.WriteLine("Starting test...");
+                    _testing.ForTest();
+                    Console.WriteLine("No issues found.");
                 }
 
                 else
@@ -138,7 +141,7 @@ namespace CMP1903_A1_2324 {
         protected bool PartnerPrompt()
         {
             string input;
-            bool isPartner = true;
+            bool isPartner;
 
             Console.WriteLine("\nWould you like to play:\n 1: With a partner?\n 2: Against the computer?");
             while (true)

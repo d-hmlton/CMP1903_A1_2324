@@ -8,8 +8,13 @@ namespace CMP1903_A1_2324
 {
     internal class ThreeOrMore : Game
     {
-        int _total = 0;
-        int _plays = 0;
+        protected int _total = 0;
+        protected int _plays = 0;
+
+        //Reward variables - allows for adjustment if wanted
+        protected int _threeReward = 3;
+        protected int _fourReward = 6;
+        protected int _fiveReward = 12;
 
         public string GameRules(string player)
         {
@@ -87,9 +92,9 @@ namespace CMP1903_A1_2324
                     }
                 }
                 
-                if (kind == 3) { _total += 3; }
-                else if (kind == 4) { _total += 6; }
-                else if (kind == 5) { _total += 12; }
+                if (kind == 3) { _total += _threeReward; } //     3 by default
+                else if (kind == 4) { _total += _fourReward; } // 6 by default
+                else if (kind == 5) { _total += _fiveReward; } //12 by default
 
                 kind = 0;
                 temp = 0;
@@ -128,6 +133,7 @@ namespace CMP1903_A1_2324
             return willRollThree;
         }
 
-        public int Plays { get { return _plays; } set { _plays = value; } }
+        public int Plays { get { return _plays; } }
+        public int Total { get { return _total; } }
     }
 }

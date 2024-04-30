@@ -16,7 +16,7 @@ namespace CMP1903_A1_2324 {
 
         //Properties
         protected int _dieVal = -1;
-        private static Random _random = new Random(); //Creates a single instance of "random" for number generation
+        protected static Random _random = new Random(); //Creates a single instance of "random" for number generation
 
         //Methods
         public int Roll() {
