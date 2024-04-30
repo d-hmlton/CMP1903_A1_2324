@@ -19,8 +19,6 @@ namespace CMP1903_A1_2324
             _plays = 1;
             int sum = 0;
 
-            Console.WriteLine("Sevens Out!");
-
             //Loop
             while (sum != 7)
             {
@@ -34,10 +32,11 @@ namespace CMP1903_A1_2324
                 if (sum != 7)
                 {
                     _plays += 1;
+                    rollStore.Clear();
                 }
             }
 
-            return $"\n{rollStore[0]} + {rollStore[1]} = 7!\nSum of all throws: {_total}";
+            return $" rolled 7, ({rollStore[0]} + {rollStore[1]}) after {_plays} plays, and a total score of {_total}.";
         }
     }
 }

@@ -17,6 +17,7 @@ namespace CMP1903_A1_2324 {
     /// </remarks>
     internal class Menu {
         SevensOut _sevensOut = new SevensOut();
+        ThreeOrMore _threeOrMore = new ThreeOrMore();
 
         static void Main(string[] args) {
             //Needed to call classes in this object
@@ -95,12 +96,16 @@ namespace CMP1903_A1_2324 {
             Console.WriteLine(" 1: Instantiate the Sevens Out game.\n 2: Instantiate the Three Or More game.");
             Console.WriteLine(" 3: View statistics data.\n 4: Perform tests in Testing class.");
 
-            string input;
+            string firstInput;
+            string secondInput;
+            string toPrint; //Stores return strings from methods
+
             while (true)
             {
                 Console.WriteLine("\nPlease enter \"1\", \"2\", \"3\", or \"4\".");
-                Console.Write("> "); input = Console.ReadLine();
-                if ((input == "1") || (input == "2"))
+                Console.Write("> "); firstInput = Console.ReadLine();
+
+                if ((firstInput == "1") || (firstInput == "2"))
                 {
                     //Boolean variables
                     bool isPlayer1 = true; //If the loop runs Player 1's turn. Set to 'false' if you want player to go after opponent
@@ -108,59 +113,62 @@ namespace CMP1903_A1_2324 {
                     bool isPartner = true; //Default value is true
 
                     //Partner vs. Computer
-                    Console.WriteLine("\nWould you like to play:\n 1: With a partner?\n 2: Against the computer?")
+                    Console.WriteLine("\nWould you like to play:\n 1: With a partner?\n 2: Against the computer?");
                     while (true)
                     {
-                        Console.WriteLine("\nPlease enter \"1\" or \"2\".")
-                        Console.Write("> "); input = Console.ReadLine();
+                        Console.WriteLine("\nPlease enter \"1\" or \"2\".");
+                        Console.Write("> "); secondInput = Console.ReadLine();
 
-                        if (input == "1")
-                        {
-                            isPartner = true;
-                            break;
-                        }
-                        else if (input == "2")
-                        {
-                            isPartner = false;
-                            break;
-                        }
+                        if (secondInput == "1") { isPartner = true; }
+                        else if (secondInput == "2") { isPartner = false; }
                         else
                         {
                             Console.WriteLine("\nThe input provided is invalid - not \"1\" or \"2\".");
                             continue;
                         }
+
+                        break;
                     }
+
+                    Console.WriteLine();
 
                     while (true)
                     {
                         if (isPlayer1 == true)
                         {
-
+                            Console.Write("Player 1");
+                            isPlayer1 = false;
                         }
                         else if (isPlayer1 == false)
                         {
-
+                            if (isPartner == true) { Console.Write("Player 2"); }
+                            if (isPartner == false) { Console.Write("Computer"); }
+                            isPlayer1 = true;
                         }
+
+                        if (firstInput == "1")
+                        {
+                            toPrint = _sevensOut.GameRules();
+                        }
+                        else if (firstInput == "2")
+                        {
+                            toPrint = _threeOrMore.GameRules(isPlayer1, isPartner);
+                        }
+                        else { toPrint = "ERROR"; }
+
+                        Console.WriteLine(toPrint);
+
+                        if (isLastTurn == true) { break; }
+                        else if (isLastTurn == false) { isLastTurn = true; }
                     }
 
                 }
 
-                if (input == "1")
-                {
-                    
-                    
-                    string toPrint = _sevensOut.GameRules();
-                    Console.WriteLine(toPrint);
-                }
-                else if (input == "2")
-                {
-                    //Insert Three Or More call here
-                }
-                else if (input == "3")
+                else if (firstInput == "3")
                 {
                     //Insert Statistics call here
                 }
-                else if (input == "4")
+                else if (firstInput == "4")
                 {
                     //Insert Testing call here
                 }

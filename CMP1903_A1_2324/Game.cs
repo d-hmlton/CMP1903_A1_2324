@@ -41,9 +41,9 @@ namespace CMP1903_A1_2324 {
         public void GameHandler()
         {
             Console.WriteLine("\n--Game--\n");
-            SevensOut();
         }
 
+        /*
         /// <summary>
         /// A method that rolls two die - or, calls "RollDie" while passing it an integer list with a capacity of two.
         /// It repeats this until the sum of the die rolled - the two values in the list returned by RollDie() - is equal to 7.
@@ -85,6 +85,7 @@ namespace CMP1903_A1_2324 {
             //Exception
             return -1;
         }
+        */
 
         /// <summary>
         /// Takes and returns an integer list - 'rollStore'.
