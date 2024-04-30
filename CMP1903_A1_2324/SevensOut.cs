@@ -36,7 +36,10 @@ namespace CMP1903_A1_2324
                 }
             }
 
-            return $" rolled 7, ({rollStore[0]} + {rollStore[1]}) after {_plays} plays, and a total score of {_total}.";
+            return $" rolled 7, ({rollStore[0]} + {rollStore[1]}) after {_plays} plays, and a total score of {_total}!\n";
         }
+
+        public int Total { get { return _total; } set { _total = value; } }
+        public int Plays { get { return _plays; } set { _plays = value; } }
     }
 }
