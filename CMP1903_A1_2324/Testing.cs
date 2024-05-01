@@ -7,75 +7,43 @@ using System.Threading.Tasks;
 
 namespace CMP1903_A1_2324 {
     /// <summary>
-    /// Uses Debug.Assert() to perform a number of tests on the Game and Die classes.
+    /// Class to perform tests on a couple of the classes in the program - Die, SevensOut, and ThreeOrMore.
     /// </summary>
-    /// <remarks>
-    /// The result of the Game object's methods is compared to their expected outputs: dice rolls within 1-6, sum within 3-18, 
-    ///  and "Sum" property then validated. "Games" should be 1, and "Average" should be equal to "Sum".
-    /// The Die class is checked separately to ensure result is within 1-6. "DieVal" property is then validated.
-    /// The program then rolls dice nine more times, checks "Games" is 10, and "Average" is within 3-18.
-    /// </remarks>
     internal class Testing {
-        /*
-         * This class should test the Game and the Die class.
-         * Create a Game object, call the methods and compare their output to expected output.
-         * Create a Die object and call its method.
-         * Use debug.assert() to make the comparisons and tests.
-         */
-
-        //Properties
-        Game testGame = new Game();
-        Die testDie = new Die();
-        protected int _testSum = 0;
+        //Parameters
+        protected Die testDie = new Die();
+        protected SevensOut _testSevens = new SevensOut();
+        protected ThreeOrMore _testThrees = new ThreeOrMore();
         protected int _testDieVal = 0;
-        protected int _testGames = 0;
 
-        //Method
+        /// <summary>
+        /// Tests Die by calling 'Roll()' and checking the result is between 1 and 6.
+        /// Tests SevensOut by calling 'GameRules()' and checking that the values of it's int list '_testStore' parameter add up to 7.
+        /// Tests ThreeOrMore by calling 'GameRules()' and checking the total is equal to or greater than 20.
+        /// </summary>
         public void ForTest() {
-            //Game object testing
-            //Rolling die in our Game test object
-            testGame.RollDie();
-
-            //Verifying the individual die values of the Game object
-            for (int i = 1; i < 4; i++) {
-                Debug.Assert(testGame.GetRolls(i) <= 6 || testGame.GetRolls(i) >= 1);
-                _testSum += testGame.GetRolls(i); //Will be used later to test the sum
-            }
-
-            //Verifying the sum of the three die values of the Game object
-            Debug.Assert(testGame.Sum <= 18 && testGame.Sum >= 3);
-
-            //Verifying that the "Sum" given by the Game object is accurate
-            Debug.Assert(testGame.Sum == _testSum);
-
-
-            //Die object testing
-            //Verifying the output of the Die object
+            //Die Test
+            //Rolling
             _testDieVal = testDie.Roll();
+
+            //Verifying output is between 1 and 6
             Debug.Assert(_testDieVal <= 6 && _testDieVal >= 1);
 
-            //Verifying that the "DieVal" given by the Die object is accurate
-            Debug.Assert(testDie.DieVal == _testDieVal);
+
+            //Sevens Out Tests
+            //Executes the Sevens Out game
+            _testSevens.GameRules();
+
+            //Ensures that the sum of the die roll is 7
+            Debug.Assert((_testSevens.TestStore[0] + _testSevens.TestStore[1]) == 7);
 
 
-            //Game object - average values testing
-            //Verifying that "Games" has been updated as expected after a first game
-            Debug.Assert(testGame.Games == 1);
+            //Three Or More Tests
+            //Executes the Three Or More game
+            _testThrees.GameRules("Computer");
 
-            //Verifying that "Average" is equal to "Sum" (as expected) after a first game
-            Debug.Assert(testGame.Average == testGame.Sum);
-
-            //Testing averages after ten rolls
-            for (int i = 2; i <= 10; i++) {
-                testGame.RollDie();
-                _testGames = i;
-            }
-
-            //Verifying that "Games" given by the Game object is (still) accurate
-            Debug.Assert(testGame.Games == _testGames);
-
-            //Verifying that "Average" is within the expected range - 3 and 18
-            Debug.Assert(testGame.Average <= 18 && testGame.Average >= 3);
+            //Ensures that the total is equal to or greater than 20 when Three Or More has ended
+            Debug.Assert(_testThrees.Total >= 20);
         }
     }
 }
