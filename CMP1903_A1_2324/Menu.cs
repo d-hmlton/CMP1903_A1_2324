@@ -10,10 +10,10 @@ namespace CMP1903_A1_2324 {
     /// </summary>
     internal class Menu {
         //Object instantiations
-        private SevensOut _sevensOut = new SevensOut();
-        private ThreeOrMore _threeOrMore = new ThreeOrMore();
-        private Statistics _statistics = new Statistics();
-        private Testing _testing = new Testing();
+        private readonly SevensOut _sevensOut = new SevensOut();
+        private readonly ThreeOrMore _threeOrMore = new ThreeOrMore();
+        private readonly Statistics _statistics = new Statistics();
+        private readonly Testing _testing = new Testing();
 
         /// <summary>
         /// Ran when the program starts. Instantiates one of itself to call the "main menu" method - C# hates doing it any other way.

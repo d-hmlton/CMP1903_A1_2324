@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace CMP1903_A1_2324
 {
+    /// <summary>
+    /// A class to store statistics for games.
+    /// Doesn't have any methods (besides get/set ones), just holds parameters for other class to retrieve or overwrite.
+    /// </summary>
     internal class Statistics
     {
         //High Scores
