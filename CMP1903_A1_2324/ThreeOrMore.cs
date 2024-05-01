@@ -174,6 +174,26 @@ namespace CMP1903_A1_2324
         }
 
         /// <summary>
+        /// A method to RollDie. An overrided version of the inherited RollDie, modified to execute the for loop for as much as the int list has capacity.
+        /// Returns the int list handed to it after it's done.
+        /// </summary>
+        protected override List<int> RollDie(List<int> rollStore)
+        {
+            //Exception handling
+            if (rollStore.Count != 0)
+            {
+                throw new ArgumentOutOfRangeException("List given to RollDie() method must be empty!");
+            }
+
+            for (int i = 0; i < rollStore.Capacity; i++)
+            {
+                rollStore.Add(_dice.Roll());
+            }
+
+            return rollStore;
+        }
+
+        /// <summary>
         /// A method to validate the input given when a two-of-a-kind occurs.
         /// The player is asked if they would like to roll an additional three die to try to get a better outcome, or to move on to the next roll.
         /// A boolean saying what the player would like to do will be returned; true for "1", and false for "2".

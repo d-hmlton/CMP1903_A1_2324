@@ -14,10 +14,11 @@ namespace CMP1903_A1_2324 {
 
         //Methods
         /// <summary>
-        /// Takes and returns an integer list - 'rollStore'. Calls '_dice's 'Roll()' as many times as there is capacity in the provided list.
+        /// Takes and returns an integer list - 'rollStore'. Calls '_dice's 'Roll()' twice.
         /// The list MUST be empty to begin with; otherwise, the code will throw an exception.
+        /// The method is 'virtual', allowing it to be overrided.
         /// </summary>
-        protected List<int> RollDie(List<int> rollStore)
+        protected virtual List<int> RollDie(List<int> rollStore)
         {
             //Exception handling
             if (rollStore.Count != 0)
@@ -25,7 +26,7 @@ namespace CMP1903_A1_2324 {
                 throw new ArgumentOutOfRangeException("List given to RollDie() method must be empty!");
             }
             
-            for (int i = 0; i < rollStore.Capacity; i++)
+            for (int i = 0; i < 2; i++)
             {
                 rollStore.Add(_dice.Roll());
             }
