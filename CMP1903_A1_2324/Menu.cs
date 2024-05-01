@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace CMP1903_A1_2324 {
     /// <summary>
-    /// Creates a Game and Testing object, and calls their central methods - .RollDie() and .ForTest(). Asks if user wants to roll again.
+    /// The primary class for the program. Loops a "main menu", which calls all the other functions of the program.
     /// </summary>
-    /// <remarks>
-    /// Runs the Testing object first, then the Game object.
-    /// Puts the .RollDie() call in a loop, which is broken when the user says they don't want to roll again.
-    /// The roll again prompt has it's own loop so that input can be validated. The program loops until it gets a valid input.
-    /// The user is asked to input "Y" or "N", but input is set to lowercase, so "y" and "n" are also valid.
-    /// When the loop is broken, the program prints some statistics stores by the Game object - the number of games and averages.
-    /// </remarks>
     internal class Menu {
         //Object instantiations
         private SevensOut _sevensOut = new SevensOut();
@@ -22,6 +15,10 @@ namespace CMP1903_A1_2324 {
         private Statistics _statistics = new Statistics();
         private Testing _testing = new Testing();
 
+        /// <summary>
+        /// Ran when the program starts. Instantiates one of itself to call the "main menu" method - C# hates doing it any other way.
+        /// Uses a while loop to keep the program running indefinitely.
+        /// </summary>
         static void Main(string[] args) {
             //Needed to call classes in this object
             Menu altMenu = new Menu();
@@ -30,20 +27,45 @@ namespace CMP1903_A1_2324 {
             {
                 Console.WriteLine("--Menu--");
                 altMenu.MainMenu();
-                break;
             }
         }
 
+        /// <summary>
+        /// The Main Menu.
+        /// When user enters 1 or 2, it starts a game; 1 for "Sevens Out", 2 for "Three Or More".
+        /// When user enters 3, the program prints some statistics data from "Statistics".
+        /// When user enters 4, the program calls "Testing" to run some tests.
+        /// </summary>
+        /// <remarks>
+        /// To go into more detail, the Main Menu runs a while loop in which the player is asked to give an input, saved to 'input'.
+        /// If the player gives an invalid input (not 1/2/3/4) it will print an error / exception handling message and ask them to try again.
+        /// The input is only treated as a string to minimise the complexity of the code and potential for things to go wrong.
+        /// 
+        /// Entering 1 and 2 will create a handful of boolean variables; 'isPlayer1', 'isLastTurn', and 'isPartner' - set as the return val of 'PartnerPrompt()'.
+        /// It then starts a while loop, which should run twice for each round; first round with 'isLastTurn' false, second with 'isLastTurn' true.
+        /// The while loop starts by figuring out what to save to 'player'; if 'isPlayer1' then Player 1, else if 'isPartner' then Player 2, else Computer.
+        /// The loop checks what the input was. If 1, it calls 'GameRules()' in '_sevensOut'; if 2, also 'GameRules()' in '_threeOrMore', passing it 'player'.
+        /// Both methods will return a string for the program to print to console. This is saved to the 'toPrint' string variable.
+        /// The code checks if new scores are greater than the high scores in '_statistics'. If they are, they're overwritten - current 'player' is passed too.
+        /// Finally, if 'isLastTurn' is set to false, it's set to true, and if it's set to true, the while loop breaks, meaning both rounds have finished.
+        /// 
+        /// Entering 3 will print a series of values fetched from inside the '_statistics' object. See Statistics.cs for more information.
+        /// Entering 4 will call '_testing's testing method, printing when it starts and when it ends. See Testing.cs for more information.
+        /// Not entering a valid input will bring up an exception handling message, instructing the user to try again, and then looping back to the prompt.
+        /// </remarks>
         protected void MainMenu()
         {
+            //Opening text
             Console.WriteLine("\nPlease select one of the following options:");
             Console.WriteLine(" 1: Instantiate the Sevens Out game.\n 2: Instantiate the Three Or More game.");
             Console.WriteLine(" 3: View statistics data.\n 4: Perform tests in Testing class.");
 
-            string input;
-            string player = "Error";
+            //String variables
+            string player = "Error"; //Stores the current player - could be "Player 1", "Player 2", or "Computer"
+            string input; //Stores the input given by user
             string toPrint; //Stores return strings from methods
 
+            //Prompt loop
             while (true)
             {
                 Console.WriteLine("\nPlease enter \"1\", \"2\", \"3\", or \"4\".");
@@ -61,17 +83,18 @@ namespace CMP1903_A1_2324 {
                     //Partner vs. Computer
                     bool isPartner = PartnerPrompt();
 
+                    //Game loop
                     while (true)
                     {
                         if (isPlayer1 == true)
                         {
                             player = "Player 1";
-                            isPlayer1 = false;
+                            isPlayer1 = false; //Flips it for next loop
                         }
-                        else if (isPlayer1 == false)
+                        else if (isPlayer1 == false) //If this is not Player 1's turn
                         {
-                            if (isPartner == true) { player = "Player 2"; }
-                            if (isPartner == false) { player = "Computer"; }
+                            if (isPartner == true) { player = "Player 2"; } //If there is a second player...
+                            if (isPartner == false) { player = "Computer"; } //If playing against the computer...
 
                             isPlayer1 = true;
                         }
@@ -99,8 +122,11 @@ namespace CMP1903_A1_2324 {
                         {
                             toPrint = _threeOrMore.GameRules(player);
 
-                            _statistics.ThreesWinner = player;
-                            _statistics.ThreesPlays = _threeOrMore.Plays;
+                            if (_statistics.ThreesPlays < _threeOrMore.Plays)
+                            {
+                                _statistics.ThreesWinner = player;
+                                _statistics.ThreesPlays = _threeOrMore.Plays;
+                            }
                         }
                         else { toPrint = "ERROR"; }
 
@@ -135,9 +161,15 @@ namespace CMP1903_A1_2324 {
                     Console.WriteLine("\nThe input provided is invalid - not \"1\", \"2\", \"3\", or \"4\".");
                     continue;
                 }
+
+                break;
             }
         }
 
+        /// <summary>
+        /// A simple method to ask the user if they would like to play games with a second player or against the computer.
+        /// Will loop the prompt until a valid input is given. When one is given, it returns a boolean 'isPartner' indicating the choice made.
+        /// </summary>
         protected bool PartnerPrompt()
         {
             string input;

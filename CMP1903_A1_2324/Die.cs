@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace CMP1903_A1_2324 {
     /// <summary>
-    /// Generates a random number between 1 and 6 and returns it.
+    /// A class to roll a six-sided dice.
     /// </summary>
     internal class Die {
-        /*
-         * The Die class should contain one property to hold the current die value,
-         * and one method that rolls the die, returns and integer and takes no parameters.
-         */
-
         //Properties
         protected int _dieVal = -1;
         protected static Random _random = new Random(); //Creates a single instance of "random" for number generation
 
         //Methods
+        /// <summary>
+        /// Generates a random number between 1 and 6, and returns it.
+        /// </summary>
         public int Roll() {
             _dieVal = _random.Next(1, 7); //Assigns _dieVal a random value between 1 and 6
             return _dieVal; //Returns the value

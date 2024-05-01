@@ -6,30 +6,17 @@ using System.Threading.Tasks;
 
 namespace CMP1903_A1_2324 {
     /// <summary>
-    /// 
+    /// An abstract class inherited by games, such as "SevensOut" and "ThreeOrMore". Passes a method to process multiple die rolls to it's children.
     /// </summary>
-    /// <remarks>
-    ///
-    /// </remarks>
-    internal abstract class Game {
-        /*
-         * The Game class should create three die objects, roll them, sum and report the total of the three dice rolls.
-         *
-         * EXTRA: For extra requirements (these aren't required though), the dice rolls could be managed so that the
-         * rolls could be continous, and the totals and other statistics could be summarised for example.
-         */
-
+    internal abstract class Game {2
         //Instantiating a die object
-        protected Die dice = new Die();
+        protected Die _dice = new Die();
 
         //Methods
         /// <summary>
-        /// Takes and returns an integer list - 'rollStore'.
-        /// Rolls die as many times as there is capacity in the provided list.
-        /// The list MUST be empty to begin with, and be full when returned.
+        /// Takes and returns an integer list - 'rollStore'. Calls '_dice's 'Roll()' as many times as there is capacity in the provided list.
+        /// The list MUST be empty to begin with; otherwise, the code will throw an exception.
         /// </summary>
-        /// <param name="rollStore"></param>
-        /// <returns></returns>
         protected List<int> RollDie(List<int> rollStore)
         {
             //Exception handling
@@ -40,7 +27,7 @@ namespace CMP1903_A1_2324 {
             
             for (int i = 0; i < rollStore.Capacity; i++)
             {
-                rollStore.Add(dice.Roll());
+                rollStore.Add(_dice.Roll());
             }
 
             return rollStore;
