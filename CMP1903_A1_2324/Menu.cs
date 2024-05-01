@@ -25,7 +25,7 @@ namespace CMP1903_A1_2324 {
            
             while (true)
             {
-                Console.WriteLine("--Menu--");
+                Console.WriteLine("\n--Menu--");
                 altMenu.MainMenu();
             }
         }
@@ -46,7 +46,7 @@ namespace CMP1903_A1_2324 {
         /// The while loop starts by figuring out what to save to 'player'; if 'isPlayer1' then Player 1, else if 'isPartner' then Player 2, else Computer.
         /// The loop checks what the input was. If 1, it calls 'GameRules()' in '_sevensOut'; if 2, also 'GameRules()' in '_threeOrMore', passing it 'player'.
         /// Both methods will return a string for the program to print to console. This is saved to the 'toPrint' string variable.
-        /// The code checks if new scores are greater than the high scores in '_statistics'. If they are, they're overwritten - current 'player' is passed too.
+        /// The code checks if new scores are better than the high scores in '_statistics'. If they are, they're overwritten - current 'player' is passed too.
         /// Finally, if 'isLastTurn' is set to false, it's set to true, and if it's set to true, the while loop breaks, meaning both rounds have finished.
         /// 
         /// Entering 3 will print a series of values fetched from inside the '_statistics' object. See Statistics.cs for more information.
@@ -100,7 +100,6 @@ namespace CMP1903_A1_2324 {
                         }
 
                         Console.WriteLine($"\n-{player}'s Turn-\n");
-                        Console.Write($"{player}");
 
                         if (input == "1")
                         {
@@ -122,7 +121,7 @@ namespace CMP1903_A1_2324 {
                         {
                             toPrint = _threeOrMore.GameRules(player);
 
-                            if (_statistics.ThreesPlays < _threeOrMore.Plays)
+                            if ((_statistics.ThreesPlays > _threeOrMore.Plays) || (_statistics.ThreesPlays == 0))
                             {
                                 _statistics.ThreesWinner = player;
                                 _statistics.ThreesPlays = _threeOrMore.Plays;
@@ -130,7 +129,7 @@ namespace CMP1903_A1_2324 {
                         }
                         else { toPrint = "ERROR"; }
 
-                        Console.WriteLine(toPrint);
+                        Console.WriteLine($"{player}" + toPrint);
 
                         if (isLastTurn == true) { break; }
                         else if (isLastTurn == false) { isLastTurn = true; }

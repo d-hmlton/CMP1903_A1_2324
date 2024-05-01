@@ -8,7 +8,7 @@ namespace CMP1903_A1_2324 {
     /// <summary>
     /// An abstract class inherited by games, such as "SevensOut" and "ThreeOrMore". Passes a method to process multiple die rolls to it's children.
     /// </summary>
-    internal abstract class Game {2
+    internal abstract class Game {
         //Instantiating a die object
         protected Die _dice = new Die();
 
