@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace CMP1903_A1_2324
 {
     /// <summary>
-    /// A child class of 'Game' that plays a game called "Three Or More". Five die are rolled, and the results are searched to see if the same number is rolled.
+    /// A child class of 'Game' that plays a game called "Three Or More".
+    /// Five die are rolled, and the results are searched to see if the same number is rolled.
     /// Scores are saved to the parameters '_total' and '_plays', though the objective is to get the lowest number of 'plays' and the 'total' doesn't matter.
     /// </summary>
     /// <remarks>
